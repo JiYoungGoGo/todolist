@@ -38,50 +38,41 @@ public class TodoDao {
 	
 	public int countAllTodo(){
 		Map<String, Object> params = Collections.emptyMap();
-		log.info(">>>>>>>>>>>>>>>>>>>DAO : count all !!!");
 		return jdbc.queryForObject(sql.COUNT_TODO_ALL, params, Integer.class);
 	}
 	
 	public int countStatus(String status){
 		Map<String, Object> params = Collections.singletonMap("status", status);
-		log.info(">>>>>>>>>>>>>>>>>>>DAO : count STATUS !!!: " +status);
 		return jdbc.queryForObject(sql.COUNT_STATUS, params, Integer.class);
 	}
 	
 	public Integer insert(Todo todo) {
-		log.info(">>>>>>>>>>>>>>>>>DAO : insert !!!");
-		
 		SqlParameterSource params = new BeanPropertySqlParameterSource(todo);
 		return insertAction.executeAndReturnKey(params).intValue();
 	}
 	
 	public int updateStatus(Todo todo){
-		log.info(">>>>>>>>>>>>>>>>>DAO : updateStatus !!!");
 		SqlParameterSource params = new BeanPropertySqlParameterSource(todo);
 		return jdbc.update(sql.UPDATE_STATUS, params);
 	}
 	
 	public List<Todo> selectAll(){
-		log.info(">>>>>>>>>>>>>>>>>DAO : selectAll !!!");
 		Map<String, Object> params = Collections.emptyMap();
 		return jdbc.query(sql.LIST_ALL, params, rowMapper);
 	}
 	
 	public List<Todo> selectStatus(String status){
-		log.info(">>>>>>>>>>>>>>>>>DAO : selectStatus !!! : "+status);
 		Map<String, Object> params = Collections.singletonMap("status", status);
 		return jdbc.query(sql.LIST_STATUS, params, rowMapper);
 	}
 	
 
 	public int deleteOne(Integer id){
-		log.info(">>>>>>>>>>>>>>>>>DAO : deleteONe !!!");
 		Map<String, ?> params = Collections.singletonMap("id", id);
 		return jdbc.update(sql.DELETE_ONE, params);
 	}
 
 	public int deleteComplte(){
-		log.info(">>>>>>>>>>>>>>>>>DAO : delete COMPLETE !!!");
 		Map<String, Object> params = Collections.emptyMap();
 		return jdbc.update(sql.DELETE_COMPLETE, params);
 	}

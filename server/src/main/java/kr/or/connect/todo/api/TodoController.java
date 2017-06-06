@@ -34,51 +34,69 @@ public class TodoController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void  create(@RequestBody Todo todo){
-		log.info("**************controller : create"+todo);
+		if(log.isDebugEnabled()){
+			log.debug("[post] todo : "+todo);
+		}
 		service.create(todo);
 	}
 	
 	@GetMapping("/list")
 	public Collection<Todo> selectAll(){
-		log.info("**************controller : list");
+		if(log.isDebugEnabled()){
+			log.debug("[get] list all");
+		}
 		return service.findAll();
 	}
 	
 	@GetMapping("/list/{status}")
 	public Collection<Todo> selectStatus(@PathVariable String status){
-		log.info("**************controller : list status");
+		if(log.isDebugEnabled()){
+			log.debug("[get] list status : "+status);
+		}
 		return service.findStatus(status);
 	}
 	
 	@GetMapping("/count")
 	public int countAll(){
-		log.info("**************controller : count All");
+		if(log.isDebugEnabled()){
+			log.debug("[get] count all");
+		}
 		return service.countAll();
 	}
 	@GetMapping("/count/{status}")
 	public int countStatus(@PathVariable String status){
-		log.info("**************controller : count status");
+		if(log.isDebugEnabled()){
+			log.debug("[get] count status : "+status);
+		}
 		return service.countStatus(status);
 	}
 	
 	@PutMapping("/{id}/{status}")
 	public void update(@PathVariable String status, @PathVariable int id){
+
+		if(log.isDebugEnabled()){
+			log.debug("[put] change status : to "+status+", id: "+id);
+		}
+		
 		Todo todo = new Todo();
 		todo.setId(id);
 		todo.setStatus(status);
-		log.info("**************controller : update status : "+todo);
 		service.updateState(todo);
 	}
 	
 	@DeleteMapping("/{id}")
 	public void deleteOne(@PathVariable int id){
-		log.info("**************controller : delete id : "+id);
+		if(log.isDebugEnabled()){
+			log.debug("[delete] delete by id :"+id);
+		}
 		service.deleteOne(id);
 	}
 	
 	@DeleteMapping
 	public void deleteComplete(){
-		log.info("**************controller : delete all complete ");
+		if(log.isDebugEnabled()){
+			log.debug("[delete] delete all completed");
+		}
 		service.deleteComplete();
 	}
 	
