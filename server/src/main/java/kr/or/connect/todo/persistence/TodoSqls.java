@@ -1,8 +1,7 @@
 package kr.or.connect.todo.persistence;
 
 public class TodoSqls {
-	static final String DELETE_BY_ID =
-			"DELETE FROM todo WHERE id= :id";
+	
 	static final String COUNT_TODO_ALL = 
 			"SELECT COUNT(*) FROM TODO_LIST_TB";
 	static final String COUNT_STATUS = 
@@ -10,7 +9,7 @@ public class TodoSqls {
 	static final String LIST_ALL =
 			"SELECT * FROM TODO_LIST_TB ORDER BY ID DESC";
 	static final String LIST_STATUS =
-			"SELECT * FROM TODO_LIST_TB WHERE STATUS =:status";
+			"SELECT * FROM TODO_LIST_TB WHERE STATUS =:status ORDER BY ID DESC";
 	static final String UPDATE_STATUS =
 			"UPDATE TODO_LIST_TB SET STATUS =:status WHERE ID =:id";
 	static final String DELETE_ONE =
